@@ -23,6 +23,10 @@ data:
       defaultCores: 0
       defaultGPUNum: 1
       memoryFactor: 1
+      # defaultDeviceMemory is the fallback device memory size in MB when NVML cannot query memory info.
+      # Required for unified memory architecture GPUs (e.g., NVIDIA GB10/DGX Spark).
+      # Set to 0 to disable (device will be skipped if memory info unavailable).
+      defaultDeviceMemory: {{ .Values.devicePlugin.defaultDeviceMemory | default 0 }}
       deviceSplitCount: {{ .Values.devicePlugin.deviceSplitCount }}
       deviceMemoryScaling: {{ .Values.devicePlugin.deviceMemoryScaling }}
       deviceCoreScaling: {{ .Values.devicePlugin.deviceCoreScaling }}

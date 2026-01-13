@@ -113,6 +113,10 @@ type NvidiaConfig struct {
 	DefaultCores                 int32  `yaml:"defaultCores"`
 	DefaultGPUNum                int32  `yaml:"defaultGPUNum"`
 	MemoryFactor                 int32  `yaml:"memoryFactor"`
+	// DefaultDeviceMemory is the fallback device memory size in MB when NVML cannot query memory info.
+	// This is required for unified memory architecture GPUs (e.g., NVIDIA GB10/DGX Spark) where
+	// GetMemoryInfo() returns "Not Supported". Set this value to the total memory of the GPU in MB.
+	DefaultDeviceMemory int64 `yaml:"defaultDeviceMemory"`
 	// TODO Whether these should be removed
 	DisableCoreLimit  bool                          `yaml:"disableCoreLimit"`
 	MigGeometriesList []device.AllowedMigGeometries `yaml:"knownMigGeometries"`

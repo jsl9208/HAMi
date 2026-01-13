@@ -262,6 +262,13 @@ func (cc ClusterManagerCollector) collectGPUDeviceMetrics(ch chan<- prometheus.M
 
 func (cc ClusterManagerCollector) collectGPUMemoryMetrics(ch chan<- prometheus.Metric, hdev nvml.Device, index int) error {
 	memory, ret := hdev.GetMemoryInfo()
+	if ret == nvml.ERROR_NOT_SUPPORTED {
+		// Unified memory architecture GPUs (e.g., NVIDIA GB10/DGX Spark) don't support
+		// traditional memory queries. Skip memory metrics collection for these devices.
+		klog.V(3).Infof("Memory metrics not supported for device %d (unified memory architecture), skipping", index)
+		return nil
+	}
+
 	if ret != nvml.SUCCESS {
 		return fmt.Errorf("nvml get memory error ret=%d", ret)
 	}

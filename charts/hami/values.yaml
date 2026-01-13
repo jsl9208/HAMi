@@ -302,6 +302,11 @@ devicePlugin:
   deviceSplitCount: 10
   deviceMemoryScaling: 1
   deviceCoreScaling: 1
+  # defaultDeviceMemory is the fallback device memory size in MB when NVML cannot query memory info.
+  # Required for unified memory architecture GPUs (e.g., NVIDIA GB10/DGX Spark).
+  # Set to 0 to disable (device will be skipped if memory info unavailable).
+  # Example: For GB10 with 128GB unified memory, set to 131072 (128 * 1024).
+  defaultDeviceMemory: 0
   # Node configuration for device plugin, Priority: externalConfigName > config > default config
   nodeConfiguration:
     # If you want to use a custom config.json, you can set the content here.
