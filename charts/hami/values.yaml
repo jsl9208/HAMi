@@ -286,6 +286,7 @@ devicePlugin:
   deviceSplitCount: 10
   deviceMemoryScaling: 1
   deviceCoreScaling: 1
+  defaultDeviceMemory: 0
   # The runtime class name to be used by the device plugin, and added to the pod.spec.runtimeClassName of applications utilizing NVIDIA GPUs
   runtimeClassName: ""
   # Whether to create runtime class, name comes from runtimeClassName when it is set
